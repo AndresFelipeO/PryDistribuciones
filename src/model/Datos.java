@@ -4,15 +4,15 @@ import controller.Estudiante;
 import controller.Persona;
 
 public class Datos {
-    private ArrayList<Persona> estudiantes;  
+    private ArrayList<Estudiante> estudiantes;  
     public Datos(){
         estudiantes=new ArrayList<>(); 
         generarDatos();
     }
-    public ArrayList<Persona> getEstudiantes() {
+    public ArrayList<Estudiante> getEstudiantes() {
         return estudiantes;
     }
-    public void setEstudiantes(ArrayList<Persona> estudiantes) {
+    public void setEstudiantes(ArrayList<Estudiante> estudiantes) {
         this.estudiantes = estudiantes;
     }
     private void generarDatos(){
