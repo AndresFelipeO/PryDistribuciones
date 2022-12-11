@@ -5,12 +5,13 @@ import model.Datos;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Datos misDatos=new Datos();
-        Estaditica esta=new Estaditica();
-       // double[][] tabla=esta.tablaDistribuccionEP(misDatos.getEstudiantes());
-       //esta.tablaDistribuccionEP(misDatos.getEstudiantes());
-    //    System.out.println();
-    //    esta.tablaDistribuccionPH(misDatos.getEstudiantes());
+         Datos misDatos = new Datos();
+         Estaditica esta = new Estaditica();
+        double[][] tabla = esta.tablaDistribuccionEP(misDatos.getEstudiantes());
+         esta.imprimirTabla(tabla, "x", "y", "Tabla Edad Peso");
+        // System.out.println("Coeficiente de cramer: " + esta.coeficieContingenciaCramer(tabla));
+        // System.out.println();
+        // esta.tablaDistribuccionPH(misDatos.getEstudiantes());
         double[][] matriz = new double[4][5];
         matriz[0][0]=8;
         matriz[0][1]=11;
@@ -32,30 +33,20 @@ public class App {
         matriz[3][2]=12;
         matriz[3][3]=2;
         matriz[3][4]=21;
-
         // x
-         ArrayList<Double> x = new ArrayList<>();
-         x.add(55.0);
-         x.add(60.0);
-         x.add(65.0);
-         x.add(70.0);
+        ArrayList<Double> x = new ArrayList<>();
+        x.add(55.0);
+        x.add(60.0);
+        x.add(65.0);
+        x.add(70.0);
         // y
-         ArrayList<Double> y=new ArrayList<>();
-         y.add(155.0);
-         y.add(165.0);
-         y.add(175.0);
-         y.add(185.0);
-         y.add(195.0);
-
-        //esta.mediaCondicional(x, y, matriz);
-        esta.PromedioY(y);
-
-     // esta.calcularMarginalesX(matriz);
-    // System.out.println(esta.cuadroMedioContigencia(matriz));
-
-    //System.out.println(esta.coeficieContingenciaCramer(tabla));
-    
-
-
+        ArrayList<Double> y=new ArrayList<>();
+        y.add(155.0);
+        y.add(165.0);
+        y.add(175.0);
+        y.add(185.0);
+        y.add(195.0);
+     
+        System.out.println(esta.RazonCorrelacion(matriz, x, y, 200));
     }
 }

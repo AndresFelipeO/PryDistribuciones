@@ -1,16 +1,15 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Estaditica {
 
-    public int[][] tablaDistribuccionEP(ArrayList<Estudiante> estudiante) {
-        // 19 20 21 22 y mas
-        // 45-55, 55-65, 65-75, 75-90
+    public double[][] tablaDistribuccionEP(ArrayList<Estudiante> estudiante) {
+        // 19 20 21 22 y mas X
+        // 45-55, 55-65, 65-75, 75-85 Y
         int x = 19;
         int y = 45;
-        int[][] tabla = new int[5][5];
+        double[][] tabla = new double[5][5];
         for (int i = 0; i < tabla.length; i++) {
             for (int j = 0; j < tabla[i].length; j++) {
                 for (int w = 0; w < estudiante.size(); w++) {
@@ -28,12 +27,6 @@ public class Estaditica {
             }
             x++;
             y = 45;
-        }
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print(tabla[i][j] + " ");
-            }
-            System.out.println("");
         }
         return tabla;
     }
@@ -58,16 +51,8 @@ public class Estaditica {
             x++;
             y = 45;
         }
-        for (int i = 0; i <  tabla.length; i++) {
-            for (int j = 0; j <tabla[i].length; j++) {
-                System.out.print(tabla[i][j] + " ");
-            }
-            System.out.println("");
-        }
         return tabla;
     }
-
-  
 
     public void tablaDistribuccionHF(ArrayList<Estudiante> estudiante) {
         // 0, 1, 2, 3 h
@@ -89,25 +74,31 @@ public class Estaditica {
             x++;
             y = 0;
         }
-        for (int i = 0; i < tabla.length; i++) {
-            for (int j = 0; j < tabla[i].length; j++) {
-                System.out.print(tabla[i][j] + " ");
+    }
+    
+    public void imprimirTabla(double [][] prmTabla,String labelX,String labelY,String titulo){
+        int x=1;
+        int y=1;
+        System.out.println("\n----"+titulo+"----");
+        int i=0;
+        while(i<prmTabla[0].length){
+            System.out.print("   "+labelY+(i+1)); 
+            i++;
+        }
+        System.out.println();
+        for (i = 0; i < prmTabla.length; i++) {
+            System.out.print(labelX+(x+i)+" ");
+            for (int j = 0; j < prmTabla[i].length; j++) {
+                System.out.print((int)prmTabla[i][j] + "    ");
             }
             System.out.println("");
         }
     }
-    // public void imprimirTablas(double [][] prmTabla,String labelX,String label){
-    //     for (int i = 0; i < tabla.length; i++) {
-    //         for (int j = 0; j < tabla[i].length; j++) {
-    //             System.out.print(tabla[i][j] + " ");
-    //         }
-    //         System.out.println("");
-    //     }
-    // }
 
     public double redondear(double numero) {
         return Math.round(numero * 100) / 100d;
     }
+/////////////////////////// PUNTO 1 //////////////////////////////
 
     public ArrayList<Double> calcularMarginalesX(double matriz[][]) {
         ArrayList<Double> marginalesX = new ArrayList<>();
@@ -165,7 +156,7 @@ public class Estaditica {
         }
     }
 
-    /////////////////////////// Intervarianza///////////////////
+    /////////////////////////// PUNTO 3 RAZON DE CORRELACION ///////////////////
 
     public ArrayList<Double> mediaCondicional(ArrayList<Double> x, ArrayList<Double> y, double matriz[][]) {
         ArrayList<Double> marginalesX = calcularMarginalesX(matriz);
@@ -191,19 +182,33 @@ public class Estaditica {
         return bnd/y.size();
     }
 
-    public double Intervarianza(ArrayList<Double> x, ArrayList<Double> y, double matriz[][]){
+    public double Intervarianza(ArrayList<Double> x, ArrayList<Double> y, double matriz[][],int n){
         ArrayList<Double> marginalesX = calcularMarginalesX(matriz);
-        ArrayList<Double> marginalesY = calcularMarginalesY(matriz);
         ArrayList<Double> mediaCondicional =  mediaCondicional(x,y,matriz);
         double promedio = 176.5;
         double bnd = 0;
-
         for (int i = 0; i < marginalesX.size(); i++){
-             for (int j = 0; j < marginalesY.size(); j++) {
-                bnd = (mediaCondicional.get(i)-)
+                bnd = bnd + Math.pow((mediaCondicional.get(i)-promedio),2)*(marginalesX.get(i)/n);
             }
-        return 0.0;
-
+    return bnd;
     }
 
+    public double VarianzaCondicional(ArrayList<Double> y, double matriz[][],int n){
+        ArrayList<Double> marginalesY = calcularMarginalesY(matriz);
+        double promedio = 176.5;
+        double bnd = 0;
+        for (int i = 0; i < marginalesY.size(); i++){
+                bnd = bnd + Math.pow((y.get(i)-promedio),2)*(marginalesY.get(i)/n);
+            }
+        return bnd;
+    }
+
+    public double RazonCorrelacion(double matriz[][],ArrayList<Double> x,ArrayList<Double> y, int totalDatos){
+
+        double Intervarianza = Intervarianza(x, y, matriz, totalDatos);
+        double VarianzaCondicional = VarianzaCondicional(y, matriz, totalDatos);
+
+        return (Intervarianza/VarianzaCondicional)*100;
+
+    }
 }
