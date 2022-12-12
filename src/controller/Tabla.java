@@ -24,17 +24,17 @@ public class Tabla {
         int x = 19;
         int y = 45;
         int aux=10;
-        double[][] tabla = new double[5][4];
+        double[][] tabla = new double[4][4];
         for (int i = 0; i < tabla.length; i++) {
             for (int j = 0; j < tabla[i].length; j++) {
                 if(j==3)
                     aux+=5;
                 for (int w = 0; w < estudiante.size(); w++) {
-                    if (x <= 22 && estudiante.get(w).getEdad() == x) {
+                    if (x <= 21 && estudiante.get(w).getEdad() == x) {
                         if (estudiante.get(w).getPeso() > y && estudiante.get(w).getPeso() <= y + aux) {
                             tabla[i][j]++;
                         }
-                    } else if (x > 22 && estudiante.get(w).getEdad() >= x) {
+                    } else if (x > 21 && estudiante.get(w).getEdad() >= x) {
                         if (estudiante.get(w).getPeso() > y && estudiante.get(w).getPeso() <= y + aux) {
                             tabla[i][j]++;
                         }
@@ -99,14 +99,14 @@ public class Tabla {
     public double[][] tablaDistribuccionEG(ArrayList<Estudiante> estudiante) {
         char x = 'M';
         int y = 19;
-        double[][] tabla = new double[2][5];
+        double[][] tabla = new double[2][4];
         for (int i = 0; i < tabla.length; i++) {
             for (int j = 0; j < tabla[i].length; j++) {
                 for (int w = 0; w < estudiante.size(); w++) {
                     if (estudiante.get(w).getGenero() == x) {
                         if (estudiante.get(w).getEdad() == y) {
                             tabla[i][j]++;
-                        } else if (y >= 23 && estudiante.get(w).getEdad() >= 23) {
+                        } else if (y >= 22 && estudiante.get(w).getEdad() >= 22) {
                             tabla[i][j]++;
                         }
                     }

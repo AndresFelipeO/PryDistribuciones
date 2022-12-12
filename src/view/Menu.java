@@ -58,7 +58,6 @@ public class Menu {
         x.add(20.0);
         x.add(21.0);
         x.add(22.0);
-        x.add(23.0);
         ArrayList<Double> y = new ArrayList<>();
         y.add(45.0);
         y.add(55.0);
@@ -125,7 +124,6 @@ public class Menu {
         y.add(20.0);
         y.add(21.0);
         y.add(22.0);
-        y.add(23.0);
         mostrarInfoTabla(tabla, x, y, "Tabla Edad Genero");
     }
 
