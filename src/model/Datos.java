@@ -1,7 +1,6 @@
 package model;
 import java.util.ArrayList;
 import controller.Estudiante;
-import controller.Persona;
 
 public class Datos {
     private ArrayList<Estudiante> estudiantes;  
